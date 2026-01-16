@@ -15,7 +15,6 @@ export function useLocalStorage<T>(
   const setItem = useCallback(
     (value: T) => {
       const stringifiedValue = isString(value) ? value : JSON.stringify(value);
-
       setItemState(value);
       localStorage.setItem(key, stringifiedValue);
     },
@@ -23,11 +22,11 @@ export function useLocalStorage<T>(
   );
 
   useEffect(() => {
-    if (initialValue) {
+    if (initialValue !== undefined) {
       setItemState(initialValue);
     }
 
-    const rawData = localStorage.getItem(key);
+    const rawData = window.localStorage.getItem(key);
 
     if (rawData !== null) {
       try {
@@ -40,7 +39,7 @@ export function useLocalStorage<T>(
   }, [initialValue, key, setItem]);
 
   function removeItem() {
-    localStorage.removeItem(key);
+    window.localStorage.removeItem(key);
   }
 
   return [item, setItem, removeItem];

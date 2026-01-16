@@ -83,7 +83,7 @@ export function Game() {
   }, [grid]);
 
   useEffect(() => {
-    if (highScore && score > highScore) {
+    if (highScore !== undefined && score > highScore) {
       setHighScore(score);
     }
   }, [score, highScore]);
