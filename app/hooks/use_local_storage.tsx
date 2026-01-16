@@ -1,3 +1,5 @@
+"use client";
+
 import { useCallback, useEffect, useState } from "react";
 
 export function useLocalStorage<T>(
@@ -15,7 +17,7 @@ export function useLocalStorage<T>(
       const stringifiedValue = isString(value) ? value : JSON.stringify(value);
 
       setItemState(value);
-      window.localStorage.setItem(key, stringifiedValue);
+      localStorage.setItem(key, stringifiedValue);
     },
     [key, setItemState]
   );
@@ -25,7 +27,7 @@ export function useLocalStorage<T>(
       setItemState(initialValue);
     }
 
-    const rawData = window.localStorage.getItem(key);
+    const rawData = localStorage.getItem(key);
 
     if (rawData !== null) {
       try {
@@ -38,7 +40,7 @@ export function useLocalStorage<T>(
   }, [initialValue, key, setItem]);
 
   function removeItem() {
-    window.localStorage.removeItem(key);
+    localStorage.removeItem(key);
   }
 
   return [item, setItem, removeItem];
