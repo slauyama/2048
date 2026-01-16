@@ -18,7 +18,7 @@ function GameSquare({ number }: { number?: number }) {
     (number !== undefined && TEXT_COLOR_MAP[number]) ?? "text-white";
   return (
     <div
-      className={`h-20 w-20 sm:h-28 sm:w-28 border-2 sm:border-8 border-slate-800 bg-slate-700 ${textColor} font-sans font-bold flex items-center justify-center ${textSize}`}
+      className={`h-20 w-20 sm:h-28 sm:w-28 border-4 sm:border-8 border-slate-800 bg-slate-700 ${textColor} font-sans font-bold flex items-center justify-center ${textSize}`}
     >
       {number?.toString() ?? ""}
     </div>
@@ -114,7 +114,7 @@ export function Game() {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex flex-col md:flex-row gap-6 md:justify-between md:items-center">
+      <div className="flex flex-col sm:flex-row gap-6 sm:gap-0 sm:justify-between sm:items-center">
         <div className="flex gap-2">
           <div className="flex flex-col min-h-16 items-center w-32 rounded p-1 bg-slate-800">
             <p className="text-lg text-slate-400 font-bold">Score</p>
@@ -140,7 +140,7 @@ export function Game() {
         </button>
       </div>
       <div className="flex justify-center">
-        <div className="rounded-md border-2 sm:border-8 border-slate-800">
+        <div className="rounded-md border-4 sm:border-8 border-slate-800">
           <GameRow numbers={grid[0]} />
           <GameRow numbers={grid[1]} />
           <GameRow numbers={grid[2]} />
