@@ -12,4 +12,5 @@
 
 - Detect light/dark mode
 - Fix responsive mode
-  - Make new game smaller
+  - Make new game button smaller
+- Fix height of body to be full height
