@@ -1,6 +1,5 @@
+import { GRID_SIZE } from "../constants";
 import { Direction, Grid } from "../types/2048";
-
-export const GRID_SIZE = 4;
 
 export function getSquares(grid: Grid, filled = false): number[][] {
   const squares: number[][] = [];

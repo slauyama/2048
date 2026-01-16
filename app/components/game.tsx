@@ -1,16 +1,11 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import {
-  copyGrid,
-  getSquares,
-  GRID_SIZE,
-  moveGrid,
-} from "../helpers/grid_helper";
+import { copyGrid, getSquares, moveGrid } from "../helpers/grid_helper";
 import { Direction, Grid } from "../types/2048";
 import { SlotsText } from "./slots_text";
 import { useLocalStorage } from "../hooks/use_local_storage";
-import { textColorMap } from "../constants/textColors";
+import { GRID_SIZE, TEXT_COLOR_MAP } from "../constants";
 
 function GameSquare({ number }: { number?: number }) {
   let textSize = "text-6xl";
@@ -20,7 +15,7 @@ function GameSquare({ number }: { number?: number }) {
     textSize = "text-5xl";
   }
   const textColor =
-    (number !== undefined && textColorMap[number]) ?? "text-white";
+    (number !== undefined && TEXT_COLOR_MAP[number]) ?? "text-white";
   return (
     <div
       className={`h-28 w-28 border-8 border-slate-800 bg-slate-700 ${textColor} font-sans font-bold flex items-center justify-center ${textSize}`}
