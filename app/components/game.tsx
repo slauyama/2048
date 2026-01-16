@@ -111,10 +111,17 @@ export function Game() {
           return;
       }
     }
+
+    function onTouchMove(event: TouchEvent) {
+      event.preventDefault();
+    }
+
     window.addEventListener("keydown", onKeyPress);
+    window.addEventListener("touchmove", onTouchMove);
 
     return () => {
       window.removeEventListener("keydown", onKeyPress);
+      window.removeEventListener("touchmove", onTouchMove);
     };
   }, [onMoveGrid]);
 
