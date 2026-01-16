@@ -1,6 +1,0 @@
-1:"$Sreact.fragment"
-2:I[58599,["/_next/static/chunks/fd637469f66021fa.js"],"Game"]
-3:I[97367,["/_next/static/chunks/4fd93823156e59e8.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-0:{"buildId":"e2bmqqq9oaexPzU7AE1Tc","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"grid items-center bg-gray-950 text-gray-50 justify-items-center min-h-screen py-2 px-1 md:p-6 md:pb-2 lg:pb-6 gap-16 font-[family-name:var(--font-geist-sans)]","children":["$","main",null,{"className":"p-6 w-full lg:w-auto flex flex-col gap-6","children":[["$","h1",null,{"className":"text-xl sm:text-3xl font-bold","children":"My 2048 Game"}],["$","$L2",null,{}]]}]}],[["$","script","script-0",{"src":"/_next/static/chunks/fd637469f66021fa.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
-5:null
