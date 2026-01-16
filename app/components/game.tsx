@@ -42,6 +42,13 @@ export function Game() {
   const [grid, setGrid] = useState<Grid>([[], [], [], []]);
   const gridRef = useRef(grid);
   const [gameOver, setGameOver] = useState(false);
+  const [startCoordinates, setStartCoordinates] = useState<{
+    x: number | null;
+    y: number | null;
+  }>({
+    x: null,
+    y: null,
+  });
 
   function resetBoard() {
     const grid: Grid = [[], [], [], []];
@@ -85,31 +92,62 @@ export function Game() {
     resetBoard();
   }, []);
 
-  function onKeyPress(event: KeyboardEvent) {
-    switch (event.code) {
-      case Direction.Right:
-      case Direction.Left:
-      case Direction.Down:
-      case Direction.Up:
-        const [newScore, newGrid] = moveGrid(grid, event.code);
-        setScore(score + newScore);
-        setGrid(newGrid);
-        fillEmptySquare(grid);
-      default:
-        return;
-    }
+  function onMoveGrid(direction: Direction) {
+    const [newScore, newGrid] = moveGrid(grid, direction);
+    setScore(score + newScore);
+    setGrid(newGrid);
+    fillEmptySquare(grid);
   }
+
   useEffect(() => {
+    function onKeyPress(event: KeyboardEvent) {
+      switch (event.code) {
+        case Direction.Right:
+        case Direction.Left:
+        case Direction.Down:
+        case Direction.Up:
+          onMoveGrid(event.code);
+        default:
+          return;
+      }
+    }
     window.addEventListener("keydown", onKeyPress);
 
     return () => {
       window.removeEventListener("keydown", onKeyPress);
     };
-  }, [onKeyPress]);
+  }, [onMoveGrid]);
 
   function onClickNewGame() {
     setScore(0);
     resetBoard();
+  }
+
+  function onTouchStart(event: React.TouchEvent<HTMLDivElement>) {
+    const { clientX: x, clientY: y } = event.touches[0];
+    setStartCoordinates({ x, y });
+  }
+
+  function onTouchMove(event: React.TouchEvent<HTMLDivElement>) {
+    event.preventDefault();
+
+    const THRESHOLD = 20;
+
+    const { clientX, clientY } = event.touches[0];
+    if (startCoordinates.x !== null && startCoordinates.y !== null) {
+      const diffX = clientX - startCoordinates.x;
+      const diffY = clientY - startCoordinates.y;
+
+      if (Math.abs(diffX) > THRESHOLD || Math.abs(diffY) > THRESHOLD) {
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+          onMoveGrid(diffX > 0 ? Direction.Right : Direction.Left);
+        } else {
+          onMoveGrid(diffY > 0 ? Direction.Down : Direction.Up);
+        }
+
+        setStartCoordinates({ x: null, y: null });
+      }
+    }
   }
 
   return (
@@ -140,7 +178,11 @@ export function Game() {
         </button>
       </div>
       <div className="flex justify-center">
-        <div className="rounded-md border-4 sm:border-8 border-slate-800">
+        <div
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          className="rounded-md border-4 sm:border-8 border-slate-800"
+        >
           <GameRow numbers={grid[0]} />
           <GameRow numbers={grid[1]} />
           <GameRow numbers={grid[2]} />
